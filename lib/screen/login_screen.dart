@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_demo/resourses/auth_methods.dart';
 
 import '../widget/coustom_button.dart';
 
@@ -10,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final AuthMethods _authMethods = AuthMethods();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -49,6 +53,12 @@ class _LoginScreenState extends State<LoginScreen> {
               top: size.height / 20,
             ),
             child: InkWell(
+              onTap: ()async{
+                bool res=await _authMethods.signInWithGoogle(context);
+                if(res){
+                  Navigator.pushNamed(context, '/home');
+                }
+              },
               child: CoustomButton(
                 size: size,
                 text: 'Log in',
